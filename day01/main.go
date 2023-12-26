@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+    "github.com/murilo-antas/aoc/util"
 )
 
 func getDigits(line []rune, validDigits map[string]int) (digit1, digit2 int) {
@@ -33,7 +34,7 @@ func findDigitString(line []rune, validDigits map[string]int) (int, bool) {
 
 func getSum(validDigits map[string]int) {
 	file, err := os.Open("./input.txt")
-	check(err)
+	util.Check(err)
 	defer file.Close()
 
 	sum := 0
@@ -43,11 +44,11 @@ func getSum(validDigits map[string]int) {
 		digit1, digit2 := getDigits(line, validDigits)
 		s := fmt.Sprintf("%d%d", digit1, digit2)
 		n, err := strconv.Atoi(s)
-		check(err)
+		util.Check(err)
 		sum += n
 	}
 	err = scanner.Err()
-	check(err)
+	util.Check(err)
 
 	fmt.Println(sum)
 }
@@ -92,8 +93,3 @@ func main() {
 	getSum(validDigitsPart2)
 }
 
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
